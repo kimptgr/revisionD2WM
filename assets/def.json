@@ -1,0 +1,310 @@
+[
+  {
+    "front": "Algorithme",
+    "back": "Suite d'étapes permettant d'obtenir un résultat"
+  },
+  {
+    "front": "Décidabilité",
+    "back": "Détermine si un problème peut être vérifié ou réfuté par un algorithme."
+  },
+  {
+    "front": "Complexité",
+    "back": "Mesure les ressources (mémoire & temps). Evalue l’efficacité."
+  },
+  {
+    "front": "Calculabilité",
+    "back": "Ce qui peut et ne peut pas être résolu par des algos"
+  },
+  {
+    "front": "Timestamp",
+    "back": "Nombre de secondes écoulées depuis le 1er janvier 1970 création d’UNIX"
+  },
+  {
+    "front": "Langage de programmation",
+    "back": "Système permettant de créer des logiciels et applications."
+  },
+  {
+    "front": "Tiobe",
+    "back": "Index qui indique les langages les plus populaires selon le nombre de recherches."
+  },
+  {
+    "front": "Paradigmes procédural",
+    "back": "Exécution étape par étape."
+  },
+  {
+    "front": "Paradigme POO",
+    "back": "Basé sur la définition et l’interaction de briques appelées objets."
+  },
+  {
+    "front": "Paradigme évènementiel",
+    "back": "L’exécution d'actions est déclenchée automatiquement lorsqu'un événement survient."
+  },
+  {
+    "front": "Langage compilé",
+    "back": "Langage traduit pour permettre son exécution."
+  },
+  {
+    "front": "Langage interprété",
+    "back": "Exécute les instructions directement, sans étape de compilation séparée."
+  },
+  {
+    "front": "Langage hybride",
+    "back": "Compilé à la volée puis interprété (exemple : Java, Kotlin)."
+  },
+  {
+    "front": "Java slogan",
+    "back": "Write once, run everywhere."
+  },
+  {
+    "front": "L.T.S.",
+    "back": "Long-Term Support, version avec support prolongé."
+  },
+  {
+    "front": "JDK",
+    "back": "Environnement d’exécution complet incluant JRE et JVM."
+  },
+  {
+    "front": "JRE",
+    "back": "Logiciel permettant l'exécution des programmes Java, inclut la JVM."
+  },
+  {
+    "front": "JVM",
+    "back": "Java Virtual Machine, simule l'exécution des programmes Java."
+  },
+  {
+    "front": "Stack Trace",
+    "back": "Remonte la séquence d'appels de fonctions jusqu'à l'origine d'une erreur."
+  },
+  {
+    "front": "Débogueur",
+    "back": "Outil permettant de trouver et corriger les erreurs dans un programme."
+  },
+  {
+    "front": "Wrapper",
+    "back": "Structure enveloppant un autre élément pour ajouter des fonctionnalités."
+  },
+  {
+    "front": "Conversion de type",
+    "back": "Transformation d'une variable d'un type à un autre."
+  },
+  {
+    "front": "Unboxing",
+    "back": "Conversion d'un type encapsulé (wrapper) vers un type primitif."
+  },
+  {
+    "front": "Autoboxing",
+    "back": "Conversion automatique d'un type primitif en un type encapsulé (wrapper)."
+  },
+  {
+    "front": "DNS",
+    "back": "Système qui associe des noms de domaine à des adresses IP."
+  },
+  {
+    "front": "Internet",
+    "back": "Réseau global permettant l'échange de données entre ordinateurs."
+  },
+  {
+    "front": "Web",
+    "back": "Ensemble de pages interconnectées accessibles via Internet."
+  },
+  {
+    "front": "W3C",
+    "back": "World Wide Web Consortium, définit les standards du web comme HTML."
+  },
+  {
+    "front": "Lien hypertexte",
+    "back": "Lien permettant de naviguer entre différentes pages ou ressources."
+  },
+  {
+    "front": "URL",
+    "back": "Uniform Resource Locator, adresse d'une ressource sur le web."
+  },
+  {
+    "front": "WWW",
+    "back": "World Wide Web, réseau de pages accessibles via des navigateurs."
+  },
+  {
+    "front": "HTTP",
+    "back": "Protocole de communication utilisé sur le web."
+  },
+  {
+    "front": "Port par défaut",
+    "back": "Numéro de port prédéfini pour un service (ex : 80 pour HTTP)."
+  },
+  {
+    "front": "Client léger",
+    "back": "Application utilisant peu de ressources locales."
+  },
+  {
+    "front": "Moteurs de rendu",
+    "back": "Composants de navigateurs qui interprètent HTML et CSS pour afficher des pages."
+  },
+  {
+    "front": "HTML",
+    "back": "HyperText Markup Language, langage de structuration de contenu web."
+  },
+  {
+    "front": "DOCTYPE",
+    "back": "Instruction définissant le type de document HTML."
+  },
+  {
+    "front": "CSS",
+    "back": "Cascading Style Sheets, langage pour styliser le contenu HTML."
+  },
+  {
+    "front": "Id",
+    "back": "Identifiant unique, souvent utilisé avec JavaScript."
+  },
+  {
+    "front": "Sécuriser l’attribut target",
+    "back": "Utiliser `rel='noopener noreferrer'` avec `target='_blank'` pour éviter des failles de sécurité."
+  },
+  {
+    "front": "Breadcrumb",
+    "back": "Fil d'Ariane pour montrer la navigation dans un site."
+  },
+  {
+    "front": "Rem",
+    "back": "Taille relative à la police de la racine (em est relatif au parent)."
+  },
+  {
+    "front": "Media Queries",
+    "back": "CSS conditionnels pour adapter le style en fonction du type de média ou des dimensions."
+  },
+  {
+    "front": "Responsivité",
+    "back": "Capacité d’un site web à s’adapter à différents formats d’écran."
+  },
+  {
+    "front": "3 étapes de sécurité sur les formulaires",
+    "back": "Validation front-end, back-end, et contraintes en base de données."
+  },
+  {
+    "front": "CDN",
+    "back": "Content Delivery Network, service pour distribuer du contenu plus rapidement."
+  },
+  {
+    "front": "SASS",
+    "back": "Syntactically Awesome Stylesheets, préprocesseur CSS."
+  },
+  {
+    "front": "Préprocesseur",
+    "back": "Programme transformant un code source avant sa compilation ou exécution."
+  },
+  {
+    "front": "—watch",
+    "back": "Option permettant la recompilation automatique des fichiers."
+  },
+  {
+    "front": "Gestionnaire de dépendance",
+    "back": "Outil pour gérer et installer les bibliothèques requises pour un projet."
+  },
+  {
+    "front": "Librairies",
+    "back": "Collections de fonctionnalités prêtes à être utilisées."
+  },
+  {
+    "front": "Projet",
+    "back": "Ensemble structuré pour développer une application ou un logiciel."
+  },
+  {
+    "front": "Squelette",
+    "back": "Structure de base d’un projet ou application."
+  },
+  {
+    "front": "JavaScript",
+    "back": "Langage interprété souvent utilisé côté client dans les pages web."
+  },
+  {
+    "front": "Attributes async",
+    "back": "Permet le chargement asynchrone d'un script."
+  },
+  {
+    "front": "Attribut defer",
+    "back": "Permet de différer l’exécution d’un script jusqu’à la fin du chargement de la page."
+  },
+  {
+    "front": "Sucre syntaxiques",
+    "back": "Raccourcis rendant le code plus lisible sans modifier son fonctionnement."
+  },
+  {
+    "front": "Callback",
+    "back": "Fonction passée en paramètre pour être appelée plus tard."
+  },
+  {
+    "front": "Limite stockage d’un cookie",
+    "back": "4 Ko par cookie."
+  },
+  {
+    "front": "Faille XSS",
+    "back": "Injection de code malveillant via des entrées utilisateur ou URL."
+  },
+  {
+    "front": "Obfuscation",
+    "back": "Technique rendant le code plus difficile à lire pour protéger contre l'analyse."
+  },
+  {
+    "front": "JSON",
+    "back": "JavaScript Object Notation, format d'échange de données en clé/valeur."
+  },
+  {
+    "front": "DOM",
+    "back": "Document Object Model, représentation en mémoire d'une page HTML."
+  },
+  {
+    "front": "API",
+    "back": "Application Programming Interface, ensemble de règles pour interagir avec un système."
+  },
+  {
+    "front": "SQL",
+    "back": "Structured Query Language, langage pour manipuler des bases de données."
+  },
+  {
+    "front": "Clé primaire",
+    "back": "Identifiant unique d'une ligne dans une table."
+  },
+  {
+    "front": "Clé étrangère",
+    "back": "Lien entre deux tables dans une base de données."
+  },
+  {
+    "front": "DDL",
+    "back": "Data Definition Language, instructions pour gérer la structure des bases de données."
+  },
+  {
+    "front": "DML",
+    "back": "Data Manipulation Language, instructions pour manipuler les données."
+  },
+  {
+    "front": "DCL",
+    "back": "Data Control Language, instructions pour gérer les droits sur les données."
+  },
+  {
+    "front": "Loi normale",
+    "back": "Principe pour éviter la redondance dans une base de données."
+  },
+  {
+    "front": "MIME",
+    "back": "Type de fichier utilisé dans les communications web."
+  },
+  {
+    "front": "SGBDR",
+    "back": "Système de Gestion de Base de Données Relationnel."
+  },
+  {
+    "front": "Calcul élémentaire",
+    "back": "Calcul effectué ligne par ligne dans une table SQL."
+  },
+  {
+    "front": "Calcul d’agrégat",
+    "back": "Calcul statistique sur des regroupements de lignes."
+  },
+  {
+    "front": "Projection",
+    "back": "Sélection de colonnes spécifiques dans une requête SQL."
+  },
+  {
+    "front": "Transaction",
+    "back": "Ensemble indivisible d’instructions SQL."
+  }
+]
