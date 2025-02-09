@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "Live Preview",
+      "workspacePath": "/home/kimus/Projets/revisionD2WM",
+      "problemMatcher": [],
+      "label": "Live Preview: Exécuter le serveur"
+    }
+  ]
+}

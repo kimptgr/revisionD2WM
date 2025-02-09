@@ -3,7 +3,9 @@ import { Text, View, StyleSheet } from "react-native";
 export default function AboutScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Application en cours de développement.</Text>
+      <Text style={styles.text}>
+        Application en cours de développement par Kim.
+      </Text>
     </View>
   );
 }
