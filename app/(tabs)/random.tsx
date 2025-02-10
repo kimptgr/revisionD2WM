@@ -27,6 +27,7 @@ const random = () => {
       <Pressable
         style={styles.buttonContainer}
         onPress={() => {
+          setIsFlipped(false);
           setRandIndex(randomIndex());
         }}
       >
