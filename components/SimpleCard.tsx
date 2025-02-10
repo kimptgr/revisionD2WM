@@ -4,23 +4,23 @@ import { useState } from "react";
 type SimpleCardProps = {
   front: string;
   back: string;
+  isFlipped: boolean;
+  onClick: () => void;
 };
 
-const SimpleCard = (props: SimpleCardProps) => {
-  const [isDisplayed, setIsDisplayed] = useState(false);
-
+const SimpleCard = ({
+  front,
+  back,
+  isFlipped,
+  onClick,
+}: SimpleCardProps): JSX.Element => {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{props.front}</Text>
-      {isDisplayed && <Text style={styles.content}>{props.back}</Text>}
-      <Pressable
-        style={styles.buttonContainer}
-        onPress={() => {
-          setIsDisplayed(!isDisplayed);
-        }}
-      >
+      <Text style={styles.title}>{front}</Text>
+      {isFlipped && <Text style={styles.content}>{back}</Text>}
+      <Pressable style={styles.buttonContainer} onPress={onClick}>
         <Text style={styles.buttonText}>
-          {isDisplayed ? "Cacher" : "Découvrir"}
+          {isFlipped ? "Cacher" : "Découvrir"}
         </Text>
       </Pressable>
     </View>

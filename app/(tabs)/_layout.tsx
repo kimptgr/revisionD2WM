@@ -43,6 +43,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="cardList"
+        options={{
+          title: "See All",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "book" : "book-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="about"
         options={{
           title: "About",
@@ -63,7 +76,7 @@ export default function TabLayout() {
           title: "Learn",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "paper" : "paper-outline"}
+              name={focused ? "help" : "help-outline"}
               color={color}
               size={24}
             />

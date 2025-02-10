@@ -8,6 +8,9 @@ export default function Index() {
       <Link href="/random" style={styles.button}>
         Une carte au hasard ?
       </Link>
+      <Link href="/cardList" style={styles.button}>
+        Voir TOUT
+      </Link>
       <Link href="/learn" style={styles.button}>
         Apprendre
       </Link>

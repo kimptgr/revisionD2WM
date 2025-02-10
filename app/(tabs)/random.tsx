@@ -1,14 +1,19 @@
-import { Text, View, StyleSheet, Button, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import definitions from "../../assets/def.json";
 import SimpleCard from "@/components/SimpleCard";
 import { useState } from "react";
 
-function randomIndex() {
+function randomIndex(): number {
   return Math.floor(Math.random() * definitions.length);
 }
 
 const random = () => {
   let [randIndex, setRandIndex] = useState(randomIndex());
+  let [isFlipped, setIsFlipped] = useState(false);
+
+  function onClick(): void {
+    setIsFlipped(!isFlipped);
+  }
 
   return (
     <View style={styles.backgroundStyle}>
@@ -16,6 +21,8 @@ const random = () => {
       <SimpleCard
         front={definitions[randIndex].front}
         back={definitions[randIndex].back}
+        isFlipped={isFlipped}
+        onClick={onClick}
       />
       <Pressable
         style={styles.buttonContainer}
@@ -52,8 +59,9 @@ const styles = StyleSheet.create({
     margin: 48,
   },
   buttonText: {
-    color: "black",
+    color: "white",
     fontSize: 20,
+    fontWeight: "bold",
   },
 });
 
