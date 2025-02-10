@@ -1,5 +1,4 @@
-import { View, Text, StyleSheet, Button, Pressable } from "react-native";
-import { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 type SimpleCardProps = {
   front: string;
@@ -18,11 +17,11 @@ const SimpleCard = ({
     <View style={styles.card}>
       <Text style={styles.title}>{front}</Text>
       {isFlipped && <Text style={styles.content}>{back}</Text>}
-      <Pressable style={styles.buttonContainer} onPress={onClick}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={onClick}>
         <Text style={styles.buttonText}>
           {isFlipped ? "Cacher" : "Découvrir"}
         </Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
