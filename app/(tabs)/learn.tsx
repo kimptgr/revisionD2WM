@@ -1,163 +1,164 @@
-import { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { Text, View, StyleSheet, ScrollView, Pressable } from "react-native";
 import definitions from "../../assets/def.json";
-import Card from "../../components/Card";
+import SimpleCard from "@/components/SimpleCard";
+import { useState } from "react";
 
-export default function App() {
-  const [randomCardIndex, setRandomCardIndex] = useState(null);
-  const [isAllCardsDisplayed, setIsAllCardsDisplayed] = useState(false);
-  const [isAllCardsLearned, setIsAllCardsLearned] = useState(false);
-  const [cardsToLearn, setCardsToLearn] = useState([]);
-  const [revealedCards, setRevealedCards] = useState([]); // Suivi des cartes révélées
+function LearnCards(): JSX.Element {
+  const [cards, setCards] = useState<number[]>([]);
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  function aleaCard() {
-    const randomIndex = Math.floor(Math.random() * definitions.length);
-    setRandomCardIndex(randomIndex);
-    if (!revealedCards.includes(randomIndex)) {
-      setRevealedCards([...revealedCards, randomIndex]); // Ajouter la carte à la liste des cartes révélées
+  function onClick() {
+    setIsFlipped(!isFlipped);
+  }
+
+  function startLearn(): void {
+    let updateCards: number[] = [];
+    while (updateCards.length < 10) {
+      let randomIndex = Math.floor(Math.random() * definitions.length);
+      if (!updateCards.includes(randomIndex)) updateCards.push(randomIndex);
     }
+    console.log(updateCards);
+    setCards(updateCards);
   }
 
-  function toggleAllCards() {
-    setIsAllCardsDisplayed(!isAllCardsDisplayed);
-    setIsAllCardsLearned(false); // Réinitialisation de l'état d'apprentissage
-  }
+  function handle(action: string): void {
+    setIsFlipped(false);
+    if (cards.length === 1 && (action === "false" || action === "showAgain"))
+      return;
 
-  function learnCards() {
-    if (isAllCardsLearned) {
-      setIsAllCardsLearned(false);
-    } else {
-      let newCards = [];
-      while (newCards.length < 10) {
-        let randomIndex = Math.floor(Math.random() * definitions.length);
-        if (!newCards.includes(definitions[randomIndex])) {
-          newCards.push(definitions[randomIndex]);
-        }
-      }
-      setCardsToLearn(newCards);
-      setIsAllCardsLearned(true);
-      setIsAllCardsDisplayed(false);
-    }
-  }
+    const updatedCards = [...cards]; // Clone une seule fois
 
-  function handleAction(index, action) {
-    let updatedCards = [...cardsToLearn];
     switch (action) {
-      case "correct":
-        updatedCards = updatedCards.filter((_, idx) => idx !== index);
+      case "right":
+        setCards(updatedCards.slice(1)); // Retire le premier élément
         break;
-      case "review":
-        updatedCards.push(updatedCards.splice(index, 1)[0]);
+
+      case "false":
+        const [first, second, ...rest] = updatedCards;
+        setCards([...rest.reverse(), first, second].reverse());
         break;
-      case "wrong":
-        if (updatedCards.length > 1) {
-          const card = updatedCards.splice(index, 1)[0];
-          updatedCards.splice(1, 0, card);
-        }
+
+      case "showAgain":
+        const firstElement = updatedCards.shift();
+        updatedCards.push(firstElement);
+        setCards(updatedCards);
         break;
+
       default:
         break;
     }
-    setCardsToLearn(updatedCards);
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Révisons pour le titre !</Text>
-
-      <TouchableOpacity onPress={aleaCard} style={styles.button}>
-        <Text style={styles.buttonText}>Une carte aléatoire ?</Text>
-      </TouchableOpacity>
-
-      {randomCardIndex !== null && (
-        <Card
-          front={definitions[randomCardIndex].front}
-          back={
-            revealedCards.includes(randomCardIndex)
-              ? definitions[randomCardIndex].back
-              : ""
-          }
-        />
+    <ScrollView contentContainerStyle={styles.backgroundStyle}>
+      <Text style={styles.title}>Ready à apprendre ?! 💥</Text>
+      <Pressable style={styles.buttonContainer} onPress={startLearn}>
+        <Text style={styles.buttonText}>Balance les cartes !</Text>
+      </Pressable>
+      {cards.length > 0 && (
+        <>
+          <Text style={styles.score}>{10 - cards.length}/10</Text>
+          <SimpleCard
+            front={definitions[cards[0]].front}
+            back={definitions[cards[0]].back}
+            isFlipped={isFlipped}
+            onClick={onClick}
+          />
+        </>
       )}
+      {cards.length > 0 && (
+        <View style={styles.choicesButtonContainer}>
+          <Pressable
+            style={[styles.choiceButton, styles.correct]}
+            onPress={() => handle("right")}
+          >
+            <Text style={styles.choiceButtonText}>Juste</Text>
+          </Pressable>
 
-      <TouchableOpacity onPress={toggleAllCards} style={styles.button}>
-        <Text style={styles.buttonText}>
-          {isAllCardsDisplayed
-            ? "Masquer toutes les cartes"
-            : "Afficher toutes les cartes"}
-        </Text>
-      </TouchableOpacity>
+          <Pressable
+            style={[styles.choiceButton, styles.review]}
+            onPress={() => handle("review")}
+          >
+            <Text style={styles.choiceButtonText}>Revoir</Text>
+          </Pressable>
 
-      {/* Affiche toutes les cartes si elles ne sont pas en mode d'apprentissage */}
-      {isAllCardsDisplayed && !isAllCardsLearned && (
-        <View style={styles.cardsContainer}>
-          {definitions.map((def, index) => (
-            <Card
-              key={index}
-              front={def.front}
-              back={def.back}
-              onPress={() => handleClick(index)}
-            />
-          ))}
+          <Pressable
+            style={[styles.choiceButton, styles.wrong]}
+            onPress={() => handle("wrong")}
+          >
+            <Text style={styles.choiceButtonText}>Faux</Text>
+          </Pressable>
         </View>
       )}
-
-      {/* Affiche les cartes à apprendre si elles sont définies */}
-      {isAllCardsLearned && cardsToLearn.length > 0 && (
-        <View style={styles.cardsContainer}>
-          {cardsToLearn.map((def, index) => (
-            <Card
-              key={index}
-              front={def.front}
-              back={def.back}
-              onAction={(action) => handleAction(index, action)}
-            />
-          ))}
-        </View>
-      )}
-
-      <TouchableOpacity onPress={learnCards} style={styles.button}>
-        <Text style={styles.buttonText}>
-          {isAllCardsLearned ? "Ne plus apprendre" : "Apprendre"}
-        </Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
+  backgroundStyle: {
+    backgroundColor: "#CCDF92",
+    flex: 1,
+    flexDirection: "column",
     alignItems: "center",
-    padding: 20,
-    backgroundColor: "#F8FAFC",
   },
   title: {
-    fontSize: 24,
+    textAlign: "center",
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginHorizontal: 16,
+    marginBottom: 48,
   },
-  button: {
+  score: {
+    marginBottom: 28,
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  buttonContainer: {
+    alignContent: "center",
+    justifyContent: "center",
     backgroundColor: "#E195AB",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    marginVertical: 10,
+    borderRadius: 5,
+    padding: 15,
+    width: 300,
+    marginBottom: 28,
   },
   buttonText: {
-    color: "#FFF",
-    fontSize: 16,
+    color: "white",
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center",
   },
-  cardsContainer: {
-    width: "100%",
-    alignItems: "center",
+
+  choicesButtonContainer: {
+    flexDirection: "row",
+  },
+
+  choiceButton: {
+    alignContent: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    padding: 5,
+    width: 100,
+    margin: 5,
+    borderColor: "#1E293B",
+    borderWidth: 1,
+  },
+
+  choiceButtonText: {
+    color: "#1E293B",
+    fontWeight: "bold",
+    fontSize: 20,
+    textAlign: "center",
+  },
+  correct: {
+    backgroundColor: "#AEEA94",
+  },
+  review: {
+    backgroundColor: "#73C7C7",
+  },
+  wrong: {
+    backgroundColor: "#F87171",
   },
 });
+
+export default LearnCards;
