@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import definitions from "../../assets/def.json";
 import SimpleCard from "@/components/SimpleCard";
 import { useState } from "react";
@@ -24,7 +24,7 @@ const random = () => {
         isFlipped={isFlipped}
         onClick={onClick}
       />
-      <Pressable
+      <TouchableOpacity
         style={styles.buttonContainer}
         onPress={() => {
           setIsFlipped(false);
@@ -32,7 +32,7 @@ const random = () => {
         }}
       >
         <Text style={styles.buttonText}>Tirer une carte</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };

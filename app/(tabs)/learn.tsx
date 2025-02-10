@@ -1,4 +1,10 @@
-import { Text, View, StyleSheet, ScrollView, Pressable } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import definitions from "../../assets/def.json";
 import SimpleCard from "@/components/SimpleCard";
 import { useState } from "react";
@@ -17,31 +23,37 @@ function LearnCards(): JSX.Element {
       let randomIndex = Math.floor(Math.random() * definitions.length);
       if (!updateCards.includes(randomIndex)) updateCards.push(randomIndex);
     }
-    console.log(updateCards);
+
     setCards(updateCards);
   }
 
   function handle(action: string): void {
     setIsFlipped(false);
-    if (cards.length === 1 && (action === "false" || action === "showAgain"))
+    if (cards.length === 1 && (action === "wrong" || action === "review"))
       return;
-
-    const updatedCards = [...cards]; // Clone une seule fois
+    let updateCards = cards.slice();
 
     switch (action) {
       case "right":
-        setCards(updatedCards.slice(1)); // Retire le premier élément
+        setCards(updateCards.slice(1));
         break;
 
-      case "false":
-        const [first, second, ...rest] = updatedCards;
+      case "wrong":
+        const [first, second, ...rest] = updateCards;
         setCards([...rest.reverse(), first, second].reverse());
+        // let firstElement = updateCards.shift();
+        // let secondElement = updateCards.shift();
+        // updateCards.reverse();
+        // updateCards.push(firstElement);
+        // updateCards.push(secondElement);
+        // updateCards.reverse();
+        // setCards(updateCards);
         break;
 
-      case "showAgain":
-        const firstElement = updatedCards.shift();
-        updatedCards.push(firstElement);
-        setCards(updatedCards);
+      case "review":
+        let firstElement1 = updateCards.shift();
+        updateCards.push(firstElement1);
+        setCards(updateCards);
         break;
 
       default:
@@ -52,9 +64,9 @@ function LearnCards(): JSX.Element {
   return (
     <ScrollView contentContainerStyle={styles.backgroundStyle}>
       <Text style={styles.title}>Ready à apprendre ?! 💥</Text>
-      <Pressable style={styles.buttonContainer} onPress={startLearn}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={startLearn}>
         <Text style={styles.buttonText}>Balance les cartes !</Text>
-      </Pressable>
+      </TouchableOpacity>
       {cards.length > 0 && (
         <>
           <Text style={styles.score}>{10 - cards.length}/10</Text>
@@ -68,26 +80,26 @@ function LearnCards(): JSX.Element {
       )}
       {cards.length > 0 && (
         <View style={styles.choicesButtonContainer}>
-          <Pressable
+          <TouchableOpacity
             style={[styles.choiceButton, styles.correct]}
             onPress={() => handle("right")}
           >
             <Text style={styles.choiceButtonText}>Juste</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <Pressable
+          <TouchableOpacity
             style={[styles.choiceButton, styles.review]}
             onPress={() => handle("review")}
           >
             <Text style={styles.choiceButtonText}>Revoir</Text>
-          </Pressable>
+          </TouchableOpacity>
 
-          <Pressable
+          <TouchableOpacity
             style={[styles.choiceButton, styles.wrong]}
             onPress={() => handle("wrong")}
           >
             <Text style={styles.choiceButtonText}>Faux</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       )}
     </ScrollView>

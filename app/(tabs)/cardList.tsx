@@ -2,9 +2,8 @@ import {
   Text,
   View,
   StyleSheet,
-  ScrollView,
   FlatList,
-  Pressable,
+  TouchableOpacity,
 } from "react-native";
 import definitions from "../../assets/def.json";
 import SimpleCard from "@/components/SimpleCard";
@@ -27,15 +26,22 @@ export default function cardList(): JSX.Element {
     setCards(updateCards);
   }
   return (
-    <ScrollView contentContainerStyle={styles.backgroundStyle}>
-      <Text style={styles.title}>Tout ça à voir 📖</Text>
-      <Pressable style={styles.buttonContainer} onPress={handleAllCards}>
-        <Text style={styles.buttonText}>
-          {isAllCardsHidden ? "Voir tout" : "Cacher tout"}
-        </Text>
-      </Pressable>
+    <View style={styles.backgroundStyle}>
       <FlatList
         data={definitions}
+        ListHeaderComponent={() => (
+          <>
+            <Text style={styles.title}>Tout ça à voir 📖</Text>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={handleAllCards}
+            >
+              <Text style={styles.buttonText}>
+                {isAllCardsHidden ? "Découvrir tout" : "Cacher tout"}
+              </Text>
+            </TouchableOpacity>
+          </>
+        )}
         renderItem={({ item, index }) => (
           <View style={styles.card}>
             <SimpleCard
@@ -47,7 +53,7 @@ export default function cardList(): JSX.Element {
           </View>
         )}
       ></FlatList>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -73,6 +79,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
+    marginHorizontal: "auto",
     alignItems: "center",
     backgroundColor: "#E195AB",
     borderRadius: 5,
