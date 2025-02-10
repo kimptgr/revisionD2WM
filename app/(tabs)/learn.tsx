@@ -1,11 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  Pressable,
-} from "react-native";
+import { Text, View, StyleSheet, ScrollView, Pressable } from "react-native";
 import definitions from "../../assets/def.json";
 import SimpleCard from "@/components/SimpleCard";
 import { useState } from "react";
@@ -19,11 +12,12 @@ function LearnCards(): JSX.Element {
   }
 
   function startLearn(): void {
-    let updateCards = [];
+    let updateCards: number[] = [];
     while (updateCards.length < 10) {
       let randomIndex = Math.floor(Math.random() * definitions.length);
-      updateCards.push(randomIndex);
+      if (!updateCards.includes(randomIndex)) updateCards.push(randomIndex);
     }
+    console.log(updateCards);
     setCards(updateCards);
   }
 
