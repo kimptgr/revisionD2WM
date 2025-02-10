@@ -30,6 +30,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="random"
+        options={{
+          title: "Random",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "infinite" : "infinite-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="about"
         options={{
           title: "About",

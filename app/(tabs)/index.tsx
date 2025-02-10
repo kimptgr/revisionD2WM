@@ -5,6 +5,9 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Révision D2WM</Text>
+      <Link href="/random" style={styles.button}>
+        Une carte au hasard ?
+      </Link>
       <Link href="/learn" style={styles.button}>
         Apprendre
       </Link>
