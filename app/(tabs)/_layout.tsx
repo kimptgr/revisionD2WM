@@ -10,7 +10,7 @@ export default function TabLayout() {
           backgroundColor: "#CCDF92",
         },
         headerShadowVisible: false,
-        headerTintColor: "black",
+        headerTintColor: "#CCDF92",
         tabBarStyle: {
           backgroundColor: "#CCDF92",
         },

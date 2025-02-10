@@ -1,40 +1,69 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Révision D2WM</Text>
-      <Link href="/random" style={styles.button}>
-        Une carte au hasard ?
-      </Link>
-      <Link href="/cardList" style={styles.button}>
-        Voir TOUT
-      </Link>
-      <Link href="/learn" style={styles.button}>
-        Apprendre
-      </Link>
-      <Link href="/about" style={styles.button}>
-        En savoir plus
-      </Link>
+    <View style={styles.background}>
+      <Text style={styles.title}>Révision D2WM</Text>
+
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Link href="/random" style={styles.buttonText}>
+          Une carte au hasard ?
+        </Link>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Link href="/cardList" style={styles.buttonText}>
+          Voir TOUT
+        </Link>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Link href="/learn" style={styles.buttonText}>
+          Apprendre
+        </Link>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonContainer}>
+        <Link href="/about" style={styles.buttonText}>
+          En savoir plus...
+        </Link>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "#CCDF92",
   },
-  text: {
-    color: "black",
-    fontSize: 25,
+  title: {
+    color: "#1E293B",
+    textAlign: "center",
+    fontSize: 30,
+    fontWeight: "bold",
+    marginHorizontal: 16,
+    marginBottom: 24,
   },
   button: {
     fontSize: 20,
     textDecorationLine: "underline",
     color: "#fff",
+  },
+  buttonContainer: {
+    alignItems: "center",
+    backgroundColor: "#E195AB",
+    borderRadius: 5,
+    padding: 15,
+    width: 300,
+    marginBottom: 24,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
