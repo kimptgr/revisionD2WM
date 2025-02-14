@@ -56,12 +56,25 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="qcm"
+        options={{
+          title: "QCM",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "help" : "help-outline"}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="learn"
         options={{
           title: "Learn",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? "help" : "help-outline"}
+              name={focused ? "barbell" : "barbell-outline"}
               color={color}
               size={24}
             />
@@ -74,9 +87,7 @@ export default function TabLayout() {
           title: "About",
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={
-                focused ? "information-circle" : "information-circle-outline"
-              }
+              name={focused ? "finger-print" : "finger-print-outline"}
               color={color}
               size={24}
             />

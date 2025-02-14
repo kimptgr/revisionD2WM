@@ -25,6 +25,12 @@ export default function Index() {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.buttonContainer}>
+        <Link href="/qcm" style={styles.buttonText}>
+          Kahout
+        </Link>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonContainer}>
         <Link href="/about" style={styles.buttonText}>
           En savoir plus...
         </Link>
