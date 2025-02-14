@@ -49,10 +49,11 @@ function qcm(): JSX.Element {
   function checkAnswer(answer: Card): void {
     setSelectedId(answer.id);
     if (answer.isCorrect) {
+      setAnswerCards(getResponses());
+      setSelectedId(-1);
     }
   }
 
-  function onClick(choice: string): void {}
   return (
     <>
       <ScrollView contentContainerStyle={styles.backgroundStyle}>
@@ -77,15 +78,6 @@ function qcm(): JSX.Element {
             </TouchableOpacity>
           ))}
         </ScrollView>
-        <TouchableOpacity
-          style={styles.buttonQuestion}
-          onPress={() => {
-            setAnswerCards(getResponses());
-            setSelectedId(-1);
-          }}
-        >
-          <Text style={styles.content}>Une autre !</Text>
-        </TouchableOpacity>
       </ScrollView>
     </>
   );
