@@ -6,50 +6,87 @@ import {
   ScrollView,
 } from "react-native";
 import cards from "../../assets/def.json";
+import { useState } from "react";
 
-const indexCard: number = 0;
+//define the type of object in cards
+type Card = {
+  id: number;
+  front: string;
+  back: string;
+  isCorrect: boolean;
+};
 
-function getRandomIndex(): number {
-  return Math.floor(Math.random() * cards.length);
+//return a random number between 0 and the parameter
+function getRandomIndex(nb: number): number {
+  return Math.floor(Math.random() * nb);
 }
 
-function getQuestion(): void {}
+// return an array of four cards
+function getResponses(): Card[] {
+  //init the index of question Card
+  let indexGoodCard = getRandomIndex(4);
 
-function onClick(choice: number): void {}
+  let fourCards: Card[] = [];
+  for (let i = 0; i < 4; i++) {
+    let randomIndex = getRandomIndex(cards.length);
+    if (!fourCards.some((element) => element.id === randomIndex))
+      fourCards.push({
+        id: randomIndex,
+        front: cards[randomIndex].front,
+        back: cards[randomIndex].back,
+        isCorrect: indexGoodCard === i ? true : false,
+      });
+  }
+
+  return fourCards;
+}
 
 function qcm(): JSX.Element {
+  //init the 4 answers
+  const [answerCards, setAnswerCards] = useState(getResponses());
+  const [selectedId, setSelectedId] = useState<number>(-1);
+
+  //check if the button pressed corresponds to the correct answer
+  function checkAnswer(answer: Card): void {
+    setSelectedId(answer.id);
+    if (answer.isCorrect) {
+    }
+  }
+
+  function onClick(choice: string): void {}
   return (
     <>
       <ScrollView contentContainerStyle={styles.backgroundStyle}>
         <Text style={styles.title}>Kahout !</Text>
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>{cards[indexCard].front}</Text>
+          {answerCards.map(
+            (ans) =>
+              ans.isCorrect && <Text style={styles.cardTitle}>{ans.front}</Text>
+          )}
 
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => onClick(1)}
-          >
-            <Text style={styles.buttonText}>A :</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => onClick(2)}
-          >
-            <Text style={styles.buttonText}>B :</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => onClick(3)}
-          >
-            <Text style={styles.buttonText}>C :</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => onClick(4)}
-          >
-            <Text style={styles.buttonText}>D :</Text>
-          </TouchableOpacity>
+          {answerCards.map((ans) => (
+            <TouchableOpacity
+              key={ans.id}
+              style={[
+                styles.buttonContainer,
+                selectedId === ans.id &&
+                  (ans.isCorrect ? styles.correct : styles.wrong),
+              ]}
+              onPress={() => checkAnswer(ans)}
+            >
+              <Text style={styles.buttonText}>{ans.back}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
+        <TouchableOpacity
+          style={styles.buttonQuestion}
+          onPress={() => {
+            setAnswerCards(getResponses());
+            setSelectedId(-1);
+          }}
+        >
+          <Text style={styles.content}>Une autre !</Text>
+        </TouchableOpacity>
       </ScrollView>
     </>
   );
@@ -72,7 +109,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: 350,
-    height: 500,
+    height: 600,
     backgroundColor: "#0F766E",
     borderRadius: 20,
     flexDirection: "column",
@@ -99,53 +136,30 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  // v contenu non utilisé
-  content: {
-    padding: 10,
-    fontSize: 16,
-    textAlign: "center",
-    color: "white",
-  },
-
-  score: {
-    marginBottom: 28,
-    fontSize: 25,
-    fontWeight: "bold",
-  },
-
-  choicesButtonContainer: {
-    flexDirection: "row",
-  },
-
-  choiceButton: {
-    alignContent: "center",
-    justifyContent: "center",
-    borderRadius: 15,
-    padding: 5,
-    width: 100,
-    margin: 5,
-    borderColor: "#1E293B",
-    borderWidth: 1,
-  },
-
-  choiceButtonText: {
-    color: "#1E293B",
-    fontWeight: "bold",
-    fontSize: 20,
-    textAlign: "center",
+    fontSize: 18,
+    textAlign: "left",
   },
   correct: {
     backgroundColor: "#AEEA94",
   },
-  review: {
-    backgroundColor: "#73C7C7",
-  },
   wrong: {
     backgroundColor: "#F87171",
+  },
+  buttonQuestion: {
+    height: 50,
+    textAlign: "center",
+    alignContent: "center",
+    justifyContent: "center",
+    backgroundColor: "#73C7C7",
+    borderRadius: 5,
+    padding: 2,
+    width: 200,
+    marginTop: 10,
+  },
+  content: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "white",
   },
 });
 
