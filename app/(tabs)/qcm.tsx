@@ -23,21 +23,20 @@ function getRandomIndex(nb: number): number {
 
 // return an array of four cards
 function getResponses(): Card[] {
-  //init the index of question Card
-  let indexGoodCard = getRandomIndex(4);
-
   let fourCards: Card[] = [];
-  for (let i = 0; i < 4; i++) {
+  while (fourCards.length < 4) {
     let randomIndex = getRandomIndex(cards.length);
     if (!fourCards.some((element) => element.id === randomIndex))
       fourCards.push({
         id: randomIndex,
         front: cards[randomIndex].front,
         back: cards[randomIndex].back,
-        isCorrect: indexGoodCard === i ? true : false,
+        isCorrect: false,
       });
   }
-
+  //init the index of question Card
+  let indexGoodCard = getRandomIndex(3);
+  fourCards[indexGoodCard].isCorrect = true;
   return fourCards;
 }
 
@@ -50,23 +49,24 @@ function qcm(): JSX.Element {
   function checkAnswer(answer: Card): void {
     setSelectedId(answer.id);
     if (answer.isCorrect) {
+      setAnswerCards(getResponses());
+      setSelectedId(-1);
     }
   }
 
-  function onClick(choice: string): void {}
   return (
     <>
       <ScrollView contentContainerStyle={styles.backgroundStyle}>
         <Text style={styles.title}>Kahout !</Text>
-        <View style={styles.card}>
+        <ScrollView contentContainerStyle={styles.card}>
           {answerCards.map(
             (ans) =>
               ans.isCorrect && <Text style={styles.cardTitle}>{ans.front}</Text>
           )}
 
-          {answerCards.map((ans) => (
+          {answerCards.map((ans, index) => (
             <TouchableOpacity
-              key={ans.id}
+              key={index}
               style={[
                 styles.buttonContainer,
                 selectedId === ans.id &&
@@ -77,16 +77,7 @@ function qcm(): JSX.Element {
               <Text style={styles.buttonText}>{ans.back}</Text>
             </TouchableOpacity>
           ))}
-        </View>
-        <TouchableOpacity
-          style={styles.buttonQuestion}
-          onPress={() => {
-            setAnswerCards(getResponses());
-            setSelectedId(-1);
-          }}
-        >
-          <Text style={styles.content}>Une autre !</Text>
-        </TouchableOpacity>
+        </ScrollView>
       </ScrollView>
     </>
   );
@@ -105,15 +96,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     marginHorizontal: 16,
-    marginBottom: 48,
+    marginBottom: 8,
   },
   card: {
     width: 350,
-    height: 600,
     backgroundColor: "#0F766E",
     borderRadius: 20,
     flexDirection: "column",
     alignItems: "center",
+    flex: 1,
   },
   cardTitle: {
     fontSize: 20,
@@ -126,18 +117,17 @@ const styles = StyleSheet.create({
   choicesRow: {},
   buttonContainer: {
     flex: 1,
-    alignContent: "center",
     justifyContent: "center",
     backgroundColor: "#E195AB",
     borderRadius: 5,
-    padding: 15,
+    padding: 5,
     width: 300,
-    marginBottom: 28,
+    marginBottom: 16,
   },
   buttonText: {
     color: "white",
     fontSize: 18,
-    textAlign: "left",
+    textAlign: "center",
   },
   correct: {
     backgroundColor: "#AEEA94",
